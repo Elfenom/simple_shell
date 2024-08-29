@@ -1,0 +1,99 @@
+.TH man 1 "28 August 2024" "0x16. C - Simple Shell"
+.SH NAME
+.B simple_shell
+- A command language interpreter for UNIX-like systems.
+.SH SYNOPSIS
+.B simple_shell
+.sp
+.SH DESCRIPTION
+.B Overview
+The Simple Shell is a basic UNIX command interpreter. It reads lines from the terminal or a file, interprets them, and executes commands.
+
+.sp
+.B Invocation
+.simple_shell can be run in two modes:
+.I Interactive
+- By typing `./simple_shell` in the terminal.
+.I Non-interactive
+- Via a pipe, e.g., `echo "/bin/ls" | ./simple_shell`.
+
+.sp
+.SS Command Execution
+After receiving a command, which is split into words forming a simple command and an optional list of arguments, the shell performs the following steps:
+
+.sp
+.I If the command name contains no slashes:
+- The shell checks if the command is a function.
+  (a) If it is a function, it is invoked.
+  (b) If not a function, the shell searches for it among the built-in commands and invokes it if found.
+
+.sp
+.I If the command name does not match any shell function or built-in, and contains no slashes:
+- The shell searches for an executable file with that name in directories listed in the PATH environment variable.
+  (a) Each directory in the PATH is searched sequentially.
+  (b) If no match is found, the shell prints an error message: "Error: File or directory not found."
+
+.sp
+.SS Sample Functions
+.sp
+echo [arguments]
+- Displays a line of text provided as arguments and prints a newline.
+
+.sp
+ls [[flags] [arguments]]
+- Lists directory contents according to the flags and arguments provided by the user.
+
+.sp
+pwd
+- Prints the current working directory.
+
+.sp
+.SS Shell Builtin Commands
+.sp
+cd [directory]
+- Changes the current working directory to the specified directory.
+
+.sp
+env
+- Prints the current environment variables.
+
+.sp
+exit [status]
+- Ends the shell session and sets its exit status to the specified value.
+
+.sp
+setenv [name value]
+- Defines a new environment variable or updates an existing one.
+
+.sp
+unsetenv [name]
+- Deletes the specified environment variable.
+
+.sp
+.SH EXAMPLES
+Interactive mode:
+.sp
+(your_terminal)$ ./simple_shell
+.RE
+.RS
+.I $
+.RE
+.sp
+Sample Usage:
+.sp
+.RS
+.I $
+echo "ALX simple_shell"
+.RE
+.RS
+.ALX simple_shell
+.RE
+.RS
+.I $
+.sp
+.SH BUGS
+Bugs and issues should be reported to the maintainers.
+.SH SEE ALSO
+Refer to the official documentation and UNIX manual pages for related commands and usage.
+.SH AUTHORS
+Edeh Paschal
